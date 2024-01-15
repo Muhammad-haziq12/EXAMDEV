@@ -1,0 +1,31 @@
+name: Devops Examen pipelines
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 14
+
+    - name: Install dependecies
+      run: npm install
+
+    - name: Checking prettier
+      run: npm run prettier
+
+    - name: Checking lint
+      run: npm run lint
+
+    - name: Building the app
+      run: npm run build
